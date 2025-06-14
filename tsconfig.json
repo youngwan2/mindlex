@@ -13,6 +13,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "emitDecoratorMetadata": true, // Enable experimental decorators -- 주석 설명이 첨부된 친구들을 TypeORM 사용을 위해 추가됨.
+    "experimentalDecorators": true, // Enable experimental decorators
+    "strictPropertyInitialization": false, // Disable strict property initialization
     "plugins": [
       {
         "name": "next"
@@ -20,6 +23,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
+    
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
