@@ -1,4 +1,4 @@
-# 사회복지 용어 사전/퀴즈/심리검사 사이트 개발 가이드
+# 환경설정 가이드
 
 ## 1. 추천 라이브러리
 
@@ -101,6 +101,3 @@ npm install next-seo date-fns axios
 # 에러 추적/로깅
 npm install @sentry/nextjs
 ```
-
-
-
