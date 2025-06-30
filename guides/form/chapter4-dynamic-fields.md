@@ -12,8 +12,8 @@ const { fields, append, remove } = useFieldArray({ control, name: 'items' });
 ### 각 훅 설명
 
 - `useForm`: 폼 전체 상태와 메서드를 제공하는 기본 훅. 여기서 반환된 `control`과 `register`를 하위 훅 및 필드에 전달.
-- `register`: 개별 입력 필드를 react-hook-form에 연결.
-- `control`: useFieldArray 등 고급 훅에서 폼 상태를 공유할 때 사용.
+  - `register`: 개별 입력 필드를 react-hook-form에 연결.
+  - `control`: useFieldArray 등 고급 훅에서 폼 상태를 공유할 때 사용.
 - `useFieldArray`: 배열 형태의 입력 필드를 동적으로 추가/삭제할 수 있게 해주는 훅.
 - `fields`: 현재 배열 필드의 상태(각 항목의 id 등 포함).
 - `append`: 배열에 새 항목 추가.
