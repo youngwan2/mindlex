@@ -1,5 +1,6 @@
-@import 'tailwindcss';
+### app/global.css
 
+```css
 :root {
   --radius: 0.65rem;
   --background: oklch(1 0 0);
@@ -68,3 +69,4 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.488 0.243 264.376);
 }
+```
