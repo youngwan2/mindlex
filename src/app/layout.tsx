@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Noto_Sans_KR } from 'next/font/google';
 import "./globals.css";
 
 
@@ -49,16 +50,24 @@ export const viewport: Viewport = {
 };
 
 
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const notoSansKR = Noto_Sans_KR({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-noto',
+});
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body
-        className={`antialiased`}
-      >
+        className={`${inter.variable} ${notoSansKR.variable} antialiased`}>
         {children}
       </body>
     </html>
