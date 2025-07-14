@@ -1,6 +1,5 @@
 "use client";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 

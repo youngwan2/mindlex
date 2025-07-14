@@ -4,6 +4,9 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 import * as dotenv from 'dotenv';
+import { AccountEntity, SessionEntity, UserEntity, VerificationTokenEntity } from '@/entities/account/accounts';
+import { TermEntity } from '@/entities/term/Term';
+import { TermCategory } from '@/entities/category/categories';
 
 
 dotenv.config();
@@ -27,6 +30,21 @@ export const AppDataSource = new DataSource({
   subscribers: [__dirname + '/../subscribers/*.{ts,js}'],
 });
 
+const DirectDataSource = new DataSource({
+  type: 'postgres',
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT) || 5440,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  synchronize: process.env.TYPEORM_SYNC === 'true', // 운영 환경에서는 false 권장
+  logging: process.env.TYPEORM_LOG === 'true',
+  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity, TermEntity, TermCategory], // 엔티티 파일 경로 수정
+  migrations: [], // 마이그레이션 파일 경로 수정
+  subscribers: [],
+});
+
+
 
 /**
  * 데이터베이스 연결을 가져오는 함수
@@ -41,10 +59,10 @@ export const AppDataSource = new DataSource({
 export async function getDataSource() {
 
   // 데이터베이스 연결이 초기화되지 않은 경우 초기화
-  if (!AppDataSource.isInitialized) {
-    await AppDataSource.initialize();
+  if (!DirectDataSource.isInitialized) {
+    await DirectDataSource.initialize();
   }
 
-  return AppDataSource
+  return DirectDataSource
 }
 

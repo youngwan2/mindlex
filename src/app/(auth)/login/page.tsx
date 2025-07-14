@@ -1,7 +1,7 @@
 import { signIn } from "@/auth";
 import { auth } from "@/auth"
 import { BookOpen } from "lucide-react";
-import { SiGoogle, SiKakaotalk, SiNaver } from "react-icons/si";
+import { SiGoogle, SiNaver } from "react-icons/si";
 import Link from "next/link";
 
 export default async function LoginPage() {

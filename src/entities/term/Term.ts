@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 
 
 @Entity({ name: 'terms' })
-export class Term {
+export class TermEntity {
     @PrimaryGeneratedColumn('identity')
     id!: number;
 
@@ -20,6 +20,9 @@ export class Term {
 
     @Column({ type: 'text', nullable: true, comment: '상세 설명' })
     description?: string;
+
+    @Column({ length: 50, nullable: true, comment: '약어 (abbreviation / initialism)' })
+    abbreviation?: string;
 
     @Column({ length: 20, nullable: true, comment: '시각자료 타입(image/mermaid/svg/none)' })
     visualType?: string;

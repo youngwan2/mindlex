@@ -96,6 +96,7 @@ export class AccountEntity {
     user!: UserEntity;
 }
 
+// 로그인 세션 관리
 @Entity({ name: "sessions" })
 export class SessionEntity {
     @PrimaryGeneratedColumn("uuid")
@@ -110,7 +111,7 @@ export class SessionEntity {
     @Column({ type: "varchar", transformer: transformer.date, comment: "만료 일시" })
     expires!: string;
 
-    @ManyToOne(() => UserEntity, (user) => user.sessions)
+    @ManyToOne(() => UserEntity, (user) => user.sessions) // 여러 세션이 하나의 유저에 연결
     user!: UserEntity;
 }
 
