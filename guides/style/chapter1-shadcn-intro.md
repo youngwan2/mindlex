@@ -8,14 +8,14 @@
 ## 1.2. 설치 및 초기 설정
 
 ```bash
-npx shadcn-ui@latest init
+npx shadcn@latest init
 ```
 
 - 프롬프트에 따라 Tailwind, 폴더 구조, 컴포넌트 경로 등 설정
 - 필요한 컴포넌트 추가:
   ```bash
-  npx shadcn-ui@latest add button
-  npx shadcn-ui@latest add dialog
+  npx shadcn@latest add button
+  npx shadcn@latest add dialog
   ```
 
 ## 1.3. 기본 사용 예시

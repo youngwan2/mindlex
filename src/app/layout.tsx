@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_KR } from 'next/font/google';
 import "./globals.css";
+import Header from "@/components/ui/Header";
+import Footer from "@/components/ui/Footer";
 
 
 
@@ -68,7 +70,11 @@ export default function RootLayout({
     <html lang="ko">
       <body
         className={`${inter.variable} ${notoSansKR.variable} antialiased`}>
-        {children}
+        <Header />
+        <main className="min-h-screen flex flex-col">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

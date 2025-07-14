@@ -7,17 +7,32 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "db:migration:generate": "npm run typeorm -- migration:generate ./src/migrations/Migration -d ./src/lib/database.ts",
+    "db:migration:run": "npm run typeorm -- migration:run -d ./src/lib/database.ts",
+    "db:migration:revert": "npm run typeorm -- migration:revert -d ./src/lib/database.ts",
+    "db:migration:create": "npm run typeorm -- migration:create ./src/migrations/Migration",
+    "db:schema:sync": "npm run typeorm -- schema:sync -d ./src/lib/database.ts",
+    "db:schema:drop": "npm run typeorm -- schema:drop -d ./src/lib/database.ts"
   },
   "dependencies": {
+    "@auth/typeorm-adapter": "^2.10.0",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.7",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "lucide-react": "^0.525.0",
     "next": "15.3.4",
+    "next-auth": "^5.0.0-beta.29",
     "openai": "^5.8.2",
     "pg": "^8.16.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.59.0",
+    "react-icons": "^5.5.0",
     "reflect-metadata": "^0.2.2",
+    "tailwind-merge": "^3.3.1",
     "typeorm": "^0.3.25",
     "zod": "^3.25.67"
   },
@@ -30,6 +45,9 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tw-animate-css": "^1.3.5",
     "typescript": "^5"
   }
 }

@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    container_name: mindlex-pgvector
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - '5440:5432'
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', '${DB_USER}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  pgvector_data:
