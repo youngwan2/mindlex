@@ -1,7 +1,13 @@
+import CategorySection from "@/features/home/components/CategorySection";
+import HeroSection from "@/features/home/components/HeroSection";
+import TermSection from "@/features/home/components/TermSection";
+
 export default function Home() {
   return (
     <div className="">
-      <h1>여기가 홈 페이지임</h1>
+      <HeroSection />
+      <CategorySection />
+      <TermSection />
     </div>
   );
 }

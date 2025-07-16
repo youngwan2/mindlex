@@ -1,21 +1,22 @@
+import * as dotenv from 'dotenv';
+
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
-import * as dotenv from 'dotenv';
-import { AccountEntity, SessionEntity, UserEntity, VerificationTokenEntity } from '@/entities/account/accounts';
-import { TermEntity } from '@/entities/term/Term';
-import { TermCategory } from '@/entities/category/categories';
 
+
+import { AccountEntity, SessionEntity, UserEntity, VerificationTokenEntity } from '../entities/account/accounts';
+import { TermEntity } from '../entities/term/Term';
+import { TermCategoryEntity } from '../entities/category/categories';
+
+
+// import { fileURLToPath } from 'url';
+// import { dirname } from 'path';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// console.log(__filename, __dirname)
-// C:\projects\fullstack\mindlex\src\lib\database.ts C:\projects\fullstack\mindlex\src\lib
 export const AppDataSource = new DataSource({
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -25,21 +26,10 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: process.env.TYPEORM_SYNC === 'true', // 운영 환경에서는 false 권장
   logging: process.env.TYPEORM_LOG === 'true',
-  entities: [__dirname + '/../entities/**/*.ts'], // 엔티티 파일 경로 수정
-  migrations: [__dirname + '/../migrations/*.{ts,js}'], // 마이그레이션 파일 경로 수정
-  subscribers: [__dirname + '/../subscribers/*.{ts,js}'],
-});
-
-const DirectDataSource = new DataSource({
-  type: 'postgres',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT) || 5440,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  synchronize: process.env.TYPEORM_SYNC === 'true', // 운영 환경에서는 false 권장
-  logging: process.env.TYPEORM_LOG === 'true',
-  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity, TermEntity, TermCategory], // 엔티티 파일 경로 수정
+  // entities: [__dirname + '/../entities/**/*.ts'], // 엔티티 파일 경로 수정
+  // migrations: [__dirname + '/../migrations/*.{ts,js}'], // 마이그레이션 파일 경로 수정
+  // subscribers: [__dirname + '/../subscribers/*.{ts,js}'],
+  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity, TermEntity, TermCategoryEntity], // 엔티티 파일 경로 수정
   migrations: [], // 마이그레이션 파일 경로 수정
   subscribers: [],
 });
@@ -59,10 +49,10 @@ const DirectDataSource = new DataSource({
 export async function getDataSource() {
 
   // 데이터베이스 연결이 초기화되지 않은 경우 초기화
-  if (!DirectDataSource.isInitialized) {
-    await DirectDataSource.initialize();
+  if (!AppDataSource.isInitialized) {
+    await AppDataSource.initialize();
   }
 
-  return DirectDataSource
+  return AppDataSource
 }
 

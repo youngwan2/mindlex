@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { signOut } from "@/auth";
-import { LogOutIcon } from "lucide-react";
+import { LogOutIcon, User } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 interface LoginLogoutButtonProps {
@@ -12,8 +12,9 @@ export default function LoginLogoutButton({ isLogin }: LoginLogoutButtonProps) {
         return (
             <Link
                 href={"/login"}
-                className="text-gray-100 text-sm transition bg-primary hover:bg-slate-700 px-1.5 py-1 rounded-md dark:bg-amber-400 dark:text-gray-100"
+                className="transition border rounded-md ml-2 dark:hover:bg-slate-700 px-1.5 py-1 dark:bg-slate-800  dark:text-gray-100 flex items-center"
             >
+                <User className="w-4 h-4 inline mr-1" />
                 로그인
             </Link>
         );
@@ -27,7 +28,7 @@ export default function LoginLogoutButton({ isLogin }: LoginLogoutButtonProps) {
         >
             <Tooltip>
                 <TooltipTrigger className="flex items-center justify-center">
-                    <LogOutIcon className="w-8 h-8 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition text-primary" />
+                    <LogOutIcon className="w-9 h-9 p-2 rounded-md ml-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition text-primary" />
                 </TooltipTrigger>
                 <TooltipContent>
                     <p>로그아웃</p>

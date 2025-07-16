@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, ManyToOne } from "typeorm";
+import { TermCategoryEntity } from "@/entities/category/categories";
 
 
 @Entity({ name: 'terms' })
@@ -41,6 +42,9 @@ export class TermEntity {
 
     @Column({ nullable: false, comment: '카테고리 ID' })
     categoryId!: number;
+
+    @ManyToOne(() => TermCategoryEntity, { eager: false })
+    category!: TermCategoryEntity;
 
     @CreateDateColumn({ comment: '생성일' })
     createdAt!: Date;

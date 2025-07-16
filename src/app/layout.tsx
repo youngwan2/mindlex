@@ -1,8 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_KR } from 'next/font/google';
-import "./globals.css";
+
 import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
+import QueryProvider from "./(provider)/QueryProvider";
+import "./globals.css";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 
 
@@ -61,6 +66,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -69,12 +75,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${inter.variable} ${notoSansKR.variable} antialiased`}>
-        <Header />
-        <main className="min-h-screen flex flex-col">
-          {children}
-        </main>
-        <Footer />
+        className={`${inter.variable} ${notoSansKR.variable} antialiased min-h-screen flex flex-col`}>
+        <QueryProvider>
+          <Header />
+          <main className="flex-1 flex flex-col">
+            {children}
+          </main>
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );

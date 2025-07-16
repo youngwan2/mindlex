@@ -41,6 +41,13 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
 
+  /* 브랜드 색상 */
+  --brand: #ffb900;
+  --brand-hover: #e6a800;
+  --brand-dark: #cc9900;
+  --brand-active: #cc9900;
+
+
 }
 
 html {
@@ -79,6 +86,11 @@ html {
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+
+  --brand: #ffb900;
+  --brand-hover: #e6a800;
+  --brand-dark: #cc9900;
+  --brand-active: #cc9900;
 }
 
 @theme inline {
@@ -117,6 +129,10 @@ html {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-active: var(--brand-active);
 
 }
 
@@ -125,9 +141,26 @@ html {
     @apply border-border outline-ring/50;
 
   }
+
   body {
     @apply bg-background text-foreground;
 
   }
 
+}
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

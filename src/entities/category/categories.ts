@@ -15,18 +15,21 @@ import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGenerate
  *   - createdAt: 생성일
  */
 @Entity("term_categories")
-export class TermCategory {
+export class TermCategoryEntity {
     @PrimaryGeneratedColumn("identity")
     id!: number;
 
-    @ManyToOne(() => TermCategory, (category) => category.children, { nullable: true }) // 상위 카테고리 (자기참조)
-    parentCategory?: TermCategory;
+    @ManyToOne(() => TermCategoryEntity, (category) => category.children, { nullable: true }) // 상위 카테고리 (자기참조)
+    parentCategory?: TermCategoryEntity;
 
-    @OneToMany(() => TermCategory, (category) => category.parentCategory) // 하위 카테고리 목록
-    children?: TermCategory[];
+    @OneToMany(() => TermCategoryEntity, (category) => category.parentCategory) // 하위 카테고리 목록
+    children?: TermCategoryEntity[];
 
     @Column({ length: 50, nullable: false, unique: true, comment: "카테고리 이름" })
     name!: string;
+
+    @Column({ length: 200, nullable: false, comment: "카테고리 설명" })
+    description!: string;
 
     @CreateDateColumn({ comment: "카테고리 생성일" })
     createdAt!: Date;
