@@ -5,6 +5,8 @@
 # 🧠 MindLex: 정신건강 용어 사전 웹/앱
 
 정신건강 실무자와 예비자, 일반인을 위한 용어 사전 및 학습 플랫폼입니다. 누구나 쉽고 편하게 정신건강 관련 용어를 검색·학습하고, 다양한 시각자료와 퀴즈, 복습 기능을 통해 전문 지식을 쌓을 수 있습니다.
+<img width="1903" height="897" alt="image" src="https://github.com/user-attachments/assets/9efe7b64-e49b-479c-a821-dc4b0a638de2" />
+
 
 ## 🚀 주요 특징
 
