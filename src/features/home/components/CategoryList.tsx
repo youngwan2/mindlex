@@ -56,12 +56,12 @@ export default function CategoryList({ categories }: CategoryListProps) {
                 const childCount = category.children ? category.children.length : 0;
                 return (
                     <SwiperSlide key={category.id}>
-                        <div className="group  border rounded-md py-6 px-4 flex flex-col items-center text-center hover:bg-gray-50 dark:hover:bg-slate-900">
-                            <div className={`group-hover:scale-125 mb-3 text-4xl ${iconColor}`}><Icon /></div>
-                            <h3 className="mb-2 font-semibold text-xl">{category.name}</h3>
-                            <p className="text-gray-600 text-lg">{category.description}</p>
+                        <div className="border dark:border-gray-700 rounded-md py-6 px-4 flex flex-col items-center text-center hover:bg-gray-50 dark:hover:bg-neutral-800 bg-white dark:bg-neutral-900">
+                            <div className={`mb-3 text-4xl ${iconColor}`}><Icon /></div>
+                            <h3 className="mb-2 font-semibold text-xl text-gray-900 dark:text-white">{category.name}</h3>
+                            <p className="text-gray-600 dark:text-gray-300 text-lg">{category.description}</p>
                             {childCount > 0 && (
-                                <div className="mt-2 text-sm text-gray-500 border rounded-full px-2 py-1">하위 카테고리 {childCount}개</div>
+                                <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 border dark:border-gray-700 rounded-full px-2 py-1">하위 카테고리 {childCount}개</div>
                             )}
                         </div>
                     </SwiperSlide>
