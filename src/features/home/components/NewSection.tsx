@@ -7,11 +7,11 @@ import { ArrowRight, Clock } from "lucide-react";
 
 export default function NewSection() {
     return (
-        <section className="py-16 bg-gray-50 dark:bg-neutral-900">
+        <section className="py-16 bg-gray-50 dark:bg-gray-900">
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between mb-8">
-                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white">최신 소식</h2>
-                    <Button variant="ghost" className="text-blue-600 dark:text-blue-300">
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">최신 소식</h2>
+                    <Button variant="ghost" className="text-blue-600 dark:text-blue-400">
                         전체보기 <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                 </div>
@@ -37,10 +37,10 @@ export default function NewSection() {
                             description: "여러분의 소중한 의견을 반영한 개선사항을 적용했습니다.",
                         },
                     ].map((news, index) => (
-                        <Card key={index} className="hover:shadow-md transition-shadow cursor-pointer bg-white dark:bg-neutral-800 border dark:border-gray-700">
+                        <Card key={index} className="hover:shadow-md transition-shadow cursor-pointer bg-white dark:bg-gray-800 border dark:border-gray-700">
                             <CardHeader>
                                 <div className="flex items-center justify-between mb-2">
-                                    <Badge variant="secondary" className="text-xs bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
+                                    <Badge variant="secondary" className="text-xs bg-gray-200 dark:bg-gray-700 dark:text-gray-300">
                                         {news.type}
                                     </Badge>
                                     <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center">

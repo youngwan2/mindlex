@@ -7,7 +7,7 @@ import TermSection from "@/features/home/components/TermSection";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="dark:bg-gray-900">
       <HeroSection />
       <CategorySection />
       <TermSection />

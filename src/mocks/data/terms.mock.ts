@@ -1,7 +1,6 @@
 import { TermEntity } from '@/entities/term/Term';
 
 export const termsMock: TermEntity[] = [
-    // 주요 정신질환 (id: 1)
     {
         id: 1,
         termKo: '우울증',

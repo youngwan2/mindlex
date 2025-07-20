@@ -18,11 +18,11 @@ export default async function TermSection() {
     const { terms, total } = await globalGetFetcher(API.TERMS(searchCondition))
 
     return (
-        <section className="bg-gray-50 dark:bg-neutral-800">
+        <section className="bg-gray-50 dark:bg-gray-800">
             <div className="max-w-[1400px] mx-auto px-4 py-16">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">용어 미리보기</h2>
-                    <Link href={"/terms"} className="flex gap-6 items-center hover:text-slate-600 dark:hover:text-slate-300 text-gray-700 dark:text-gray-200">전체보기({total}) <ArrowRight /></Link>
+                    <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-100">용어 미리보기</h2>
+                    <Link href={"/terms"} className="flex gap-6 items-center hover:text-slate-600 dark:hover:text-slate-400 text-gray-700 dark:text-gray-300">전체보기({total}) <ArrowRight /></Link>
                 </div>
                 <TermList terms={terms} />
             </div>

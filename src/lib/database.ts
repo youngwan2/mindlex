@@ -4,7 +4,6 @@ import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 
 
-
 import { AccountEntity, SessionEntity, UserEntity, VerificationTokenEntity } from '../entities/account/accounts';
 import { TermEntity } from '../entities/term/Term';
 import { TermCategoryEntity } from '../entities/category/categories';

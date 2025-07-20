@@ -28,23 +28,22 @@ export default function TermList({ terms }: HomeTermListProps) {
             }}
         >
             {terms.map(term => {
-                const labelColor = CATEGORY_LABEL_COLOR_MAP[term.category?.id] || "bg-gray-100 text-gray-500 border-gray-300";
-                const darkLabelColor = {
-                    1: "dark:bg-yellow-900 dark:text-yellow-200 dark:border-yellow-700",
-                    10: "dark:bg-blue-900 dark:text-blue-200 dark:border-blue-700",
-                    16: "dark:bg-green-900 dark:text-green-200 dark:border-green-700",
-                    21: "dark:bg-pink-900 dark:text-pink-200 dark:border-pink-700",
-                    25: "dark:bg-purple-900 dark:text-purple-200 dark:border-purple-700",
-                    30: "dark:bg-orange-900 dark:text-orange-200 dark:border-orange-700",
-                    34: "dark:bg-cyan-900 dark:text-cyan-200 dark:border-cyan-700",
-                    38: "dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700",
-                }[term.category?.id] || "dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700";
+                const labelColor = CATEGORY_LABEL_COLOR_MAP[term.category?.id] || "bg-gray-100 text-gray-500 border-gray-300"; const darkLabelColor = {
+                    1: "dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700",
+                    10: "dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700",
+                    16: "dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
+                    21: "dark:bg-pink-900/30 dark:text-pink-300 dark:border-pink-700",
+                    25: "dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-700",
+                    30: "dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-700",
+                    34: "dark:bg-cyan-900/30 dark:text-cyan-300 dark:border-cyan-700",
+                    38: "dark:bg-gray-700 dark:text-gray-400 dark:border-gray-600",
+                }[term.category?.id] || "dark:bg-gray-700 dark:text-gray-400 dark:border-gray-600";
                 return (
-                    <SwiperSlide key={term.id} className="p-2 rounded-md py-4 bg-white dark:bg-neutral-900 dark:border-gray-700">
+                    <SwiperSlide key={term.id} className="p-2 rounded-md py-4 bg-white dark:bg-gray-800 dark:border-gray-700">
                         <div key={term.id} className=" min-w-[280px]">
                             <div className="flex-col items-center justify-center mb-2">
                                 <span className={`inline-block text-sm border rounded-xl px-1.5 py-0.5 min-w-[100px] mb-3 ${labelColor} ${darkLabelColor}`}>{term.category.name || '없음'}</span>
-                                <h3 className="text-lg font-semibold flex flex-wrap justify-center text-gray-900 dark:text-white">{term.termKo} <span>({term.termEn})</span></h3>
+                                <h3 className="text-lg font-semibold flex flex-wrap justify-center text-gray-900 dark:text-gray-100">{term.termKo} <span>({term.termEn})</span></h3>
                             </div>
                             <p className="text-sm text-gray-600 dark:text-gray-300 text-center">{term.definition}</p>
                         </div>

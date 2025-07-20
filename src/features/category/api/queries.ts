@@ -16,7 +16,8 @@ export function useCategoryGetQuery() {
 
 
     return {
-        categories: data || [],
+        categories: data?.categories || [],
+        totalCount: data?.totalCount || 0, // 전체 카테고리 수
         isLoading,
         error: error as Error | null
     }

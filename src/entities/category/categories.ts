@@ -31,6 +31,9 @@ export class TermCategoryEntity {
     @Column({ length: 200, nullable: false, comment: "카테고리 설명" })
     description!: string;
 
+    @Column({ type: "int", default: 1, nullable: false, comment: "카테고리 계층 레벨(1=최상위, 2=하위...)" })
+    level!: number;
+
     @CreateDateColumn({ comment: "카테고리 생성일" })
     createdAt!: Date;
 }
