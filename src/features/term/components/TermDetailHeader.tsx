@@ -1,8 +1,9 @@
-import { ArrowLeft, Bookmark, Calendar, ChevronRight, Earth, Play, Share } from "lucide-react";
+import { ArrowLeft, Calendar, ChevronRight, Earth, Play, Share } from "lucide-react";
 import Link from "next/link";
 import { Term } from "../types/term.types";
 import { Button } from "@/components/ui/button";
 import { MdAbc } from "react-icons/md";
+import FavoriteButton from "@/shared/components/FavoriteButton";
 
 
 interface TermDetailHeaderProps {
@@ -57,10 +58,7 @@ export default function TermDetailHeader({ term }: TermDetailHeaderProps) {
 
                 {/* 북마크, 공유하기, 퀴즈풀기 */}
                 <div className="flex items-center gap-4 flex-col">
-                    <Button variant={'outline'} className="w-full flex items-center gap-2 px-4 py-2 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                        <Bookmark className="w-5 h-5" />
-                        <span className="text-sm">북마크</span>
-                    </Button>
+                    <FavoriteButton variant={'outline'} targetId={term.id} type="term" />
                     <Button variant={'outline'} className="w-full flex items-center gap-2 px-4 py-2  dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                         <Share className="w-5 h-5" />
                         <span className="text-sm">공유하기</span>

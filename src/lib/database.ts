@@ -7,6 +7,7 @@ import { DataSource } from 'typeorm';
 import { AccountEntity, SessionEntity, UserEntity, VerificationTokenEntity } from '../entities/account/accounts';
 import { TermEntity } from '../entities/term/Term';
 import { TermCategoryEntity } from '../entities/category/categories';
+import { FavoritesEntity } from '@/entities/favorite/favorites';
 
 
 // import { fileURLToPath } from 'url';
@@ -28,7 +29,7 @@ export const AppDataSource = new DataSource({
   // entities: [__dirname + '/../entities/**/*.ts'], // 엔티티 파일 경로 수정
   // migrations: [__dirname + '/../migrations/*.{ts,js}'], // 마이그레이션 파일 경로 수정
   // subscribers: [__dirname + '/../subscribers/*.{ts,js}'],
-  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity, TermEntity, TermCategoryEntity], // 엔티티 파일 경로 수정
+  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity, TermEntity, TermCategoryEntity, FavoritesEntity], // 엔티티 파일 경로 수정
   migrations: [], // 마이그레이션 파일 경로 수정
   subscribers: [],
 });

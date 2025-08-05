@@ -4,6 +4,7 @@ import { Inter, Noto_Sans_KR } from 'next/font/google';
 import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
 import QueryProvider from "./(provider)/QueryProvider";
+import ToastProvider from "./(provider)/ToastProvider";
 import "./globals.css";
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -77,6 +78,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${notoSansKR.variable} antialiased min-h-screen flex flex-col`}>
         <QueryProvider>
+          <ToastProvider />
           <Header />
           <main className="flex-1 flex flex-col">
             {children}

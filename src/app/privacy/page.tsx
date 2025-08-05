@@ -13,7 +13,7 @@ export default function PrivacyPage() {
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 space-y-8">
                     <section>
                         <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">1. 총칙</h2>
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">마인드렉스(이하 "회사")는 이용자의 개인정보를 중요시하며, 관련 법령을 준수하고 있습니다. 본 개인정보처리방침은 회사가 제공하는 서비스 이용 시 이용자의 개인정보가 어떻게 수집, 이용, 보호되는지 안내합니다.</p>
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">마인드렉스(이하 &quot;회사&quot;)는 이용자의 개인정보를 중요시하며, 관련 법령을 준수하고 있습니다. 본 개인정보처리방침은 회사가 제공하는 서비스 이용 시 이용자의 개인정보가 어떻게 수집, 이용, 보호되는지 안내합니다.</p>
                     </section>
                     <section>
                         <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">2. 수집하는 개인정보 항목</h2>
