@@ -20,7 +20,6 @@ export default function CategorySortBar() {
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="alphabetical">가나다순</SelectItem>
-                        <SelectItem value="newest">등록순</SelectItem>
                         <SelectItem value="termCount">용어수순</SelectItem>
                     </SelectContent>
                 </Select>

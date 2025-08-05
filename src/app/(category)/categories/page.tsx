@@ -12,7 +12,9 @@ export default function CategoryPage() {
 
     function onTopCategoryChange() {
         setTop(old => !old);
-    } return (
+    }
+
+    return (
         <section className="bg-gray-50 dark:bg-gray-900 overflow-auto">
             <CategoryHeader onTopChange={onTopCategoryChange} isTop={isTopCategory} />
             <CategoryMain categories={categories} isLoading={isLoading} isTopCategory={isTopCategory} totalCount={totalCount} />

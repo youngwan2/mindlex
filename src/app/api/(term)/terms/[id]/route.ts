@@ -16,9 +16,15 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
     const termEntityRepo = ds.getRepository(TermEntity);
 
-    const termEntity = await termEntityRepo.findOneBy({
-        id: Number(termId)
-    })
+    const termEntity = await termEntityRepo
+        .createQueryBuilder("terms")
+        .innerJoinAndSelect("terms.category", "term_categories")
+        .where("terms.id = :id", { id: termId })
+        .getOne();
+
+    if (!termEntity) {
+        return NextResponse.json({ error: "조회된 용어 없음" }, { status: 404 });
+    }
 
     return NextResponse.json(termEntity);
 

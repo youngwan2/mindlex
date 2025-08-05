@@ -184,46 +184,48 @@ export default function CategoryMain({ categories, totalCount, isLoading, isTopC
     };
 
     return (
-        <div className="mt-6">            <div className="max-w-[1400px] mx-auto h-auto px-4">
-            <p className="flex items-center justify-between mb-4 text-gray-900 dark:text-gray-100">
-                {isTopCategory ? "상위 카테고리" : "카테고리 목록"} ({totalCount || categories.length})
-            </p>
+        <div className="mt-6">
+            <div className="max-w-[1400px] mx-auto h-auto px-4">
+                <p className="flex items-center justify-between mb-4 text-gray-900 dark:text-gray-100">
+                    {isTopCategory ? `상위 카테고리(${categories.length})` : `전체 카테고리(${totalCount})`}
+                </p>
 
-            {/* 뷰 모드 변경 버튼 */}
-            <ViewModeButtons />
+                {/* 뷰 모드 변경 버튼 */}
+                <ViewModeButtons />
 
-            {/* 카드 뷰 */}                {isLoading ? (
-                <div className="text-center py-10 text-gray-600 dark:text-gray-400">카테고리 목록을 불러오는 중..</div>
-            ) : (
-                <>
-                    {viewMode === 'grid' && (
-                        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {categories.map((category) => (
-                                <div key={category.id}>
-                                    {renderCategoryCard(category)}
-                                    {!isTopCategory && renderChildren(category.children, category.level, category.name)}
-                                </div>
-                            ))}
-                        </ul>
-                    )}
-                    {viewMode === 'list' && (
-                        <ul className="space-y-4">
-                            {categories.map((category) => (
-                                <div key={category.id}>
-                                    {renderCategoryListItem(category)}
-                                    {!isTopCategory && renderChildren(category.children, category.level, category.name)}
-                                </div>
-                            ))}
-                        </ul>
-                    )}
-                    {viewMode === 'tree' && (
-                        <div className="space-y-2">
-                            {categories.map((category) => renderCategoryTreeItem(category))}
-                        </div>
-                    )}
-                </>
-            )}
-        </div>
+                {/* 카드 뷰 */}
+                {isLoading ? (
+                    <div className="text-center py-10 text-gray-600 dark:text-gray-400">카테고리 목록을 불러오는 중..</div>
+                ) : (
+                    <>
+                        {viewMode === 'grid' && (
+                            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {categories.map((category) => (
+                                    <div key={category.id}>
+                                        {renderCategoryCard(category)}
+                                        {!isTopCategory && renderChildren(category.children, category.level, category.name)}
+                                    </div>
+                                ))}
+                            </ul>
+                        )}
+                        {viewMode === 'list' && (
+                            <ul className="space-y-4">
+                                {categories.map((category) => (
+                                    <div key={category.id}>
+                                        {renderCategoryListItem(category)}
+                                        {!isTopCategory && renderChildren(category.children, category.level, category.name)}
+                                    </div>
+                                ))}
+                            </ul>
+                        )}
+                        {viewMode === 'tree' && (
+                            <div className="space-y-2">
+                                {categories.map((category) => renderCategoryTreeItem(category))}
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
         </div>
     )
 }

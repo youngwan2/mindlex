@@ -42,10 +42,10 @@
   --foreground: oklch(0.129 0.042 264.695);
 
   /* 브랜드 색상 */
-  --brand: #ffb900;
-  --brand-hover: #e6a800;
-  --brand-dark: #cc9900;
-  --brand-active: #cc9900;
+  --brand: #ff6a00;
+  --brand-hover: #e86507;
+  --brand-dark: #FF6900;
+  --brand-active: #ef6603;
 
 
 }

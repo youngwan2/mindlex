@@ -66,6 +66,7 @@ export async function GET(req: NextRequest) {
         'term.definition',
         'term.description',
         'term.abbreviation',
+        'term.createdAt',
         'term.visualUrl',
         'term.visualCode',
         'term.audioUrl',

@@ -56,10 +56,6 @@ export default function CategoryList({ categories }: CategoryListProps) {
                 const childCount = category.children ? category.children.length : 0;
                 return (<SwiperSlide key={category.id}>
                     <div className="relative group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg px-6 py-7 flex flex-col items-center text-center transition hover:shadow-xl hover:-translate-y-1 duration-200 min-h-[270px]">
-                        {/* 브랜드 컬러 배지 */}
-                        <span className="absolute left-4 top-4 bg-[#ffb900] text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm z-10 select-none">
-                            {category.level === 1 ? '대표' : '세부'}
-                        </span>
                         {/* 아이콘 */}
                         <div className={`mb-3 mt-2 text-5xl ${iconColor} drop-shadow-sm`}>
                             <Icon />
@@ -71,7 +67,7 @@ export default function CategoryList({ categories }: CategoryListProps) {
                         {/* 용어 개수/하위 카테고리 개수 */}
                         <div className="flex gap-2 justify-center items-center mt-auto">
                             {typeof category.termCount === 'number' && (
-                                <span className="inline-flex items-center bg-[#ffb900]/10 text-[#ffb900] text-xs font-semibold px-2 py-1 rounded-full border border-[#ffb900]/30">
+                                <span className="inline-flex items-center bg-[#ffb900]/10 text-brand text-xs font-semibold px-2 py-1 rounded-full border border-[#ffb900]/30">
                                     용어 {category.termCount.toLocaleString()}개
                                 </span>
                             )}

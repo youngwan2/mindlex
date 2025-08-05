@@ -5,7 +5,7 @@ import { Play, Star, TrendingUp, Trophy } from "lucide-react";
 
 export default function QuizSection() {
     return (
-        <section className="py-16 bg-gradient-to-r from-[#1c2d4e] to-[#212e48] text-white dark:from-gray-800 dark:to-gray-900 dark:text-gray-100">
+        <section className="py-16 bg-gradient-to-r from-brand to-[#ff8349] text-white dark:from-gray-800 dark:to-gray-900 dark:text-gray-100">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-4 text-white dark:text-gray-100">오늘의 퀴즈에 도전해보세요!</h2>

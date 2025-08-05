@@ -1,11 +1,13 @@
-// interface PropsType { }
+"use client"
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Book, Play, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
+    const router = useRouter();
     return (
         <section className="w-full bg-gray-50 dark:bg-gray-900">
             <div className="max-w-[896px] mx-auto py-24 px-4">
@@ -22,10 +24,14 @@ export default function HeroSection() {
                         <Play /> 퀴즈 시작하기
                     </Button>
 
-                    <Button variant="outline" size="sm" className="rounded-3xl  px-12 md:py-6 py-5 md:max-w-[200px] max-w-auto w-full dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className="rounded-3xl  px-12 md:py-6 py-5 md:max-w-[200px] max-w-auto w-full dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-700"
+                        onClick={() => router.push("/terms")}
+                    >
                         <Book /> 용어사전 둘러보기
                     </Button>
-
                 </div>
             </div>
         </section>

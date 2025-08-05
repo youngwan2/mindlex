@@ -32,12 +32,11 @@ export default async function Header() {
 
                     {/* 모바일 전용 검색 모달 */}
                     <MobileSearch />
-                </div>                <nav className="flex items-center gap-1 md:order-none order-2 w-full md:w-auto justify-end md:justify-end min-w-[420px]">
+                </div>
+                <nav className="flex items-center gap-1 md:order-none order-2 w-full md:w-auto justify-end md:justify-end min-w-[450px]">
                     <Link href="/terms" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition w-[79px]">용어사전</Link>
                     <Link href="/quiz" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition w-[52px]">퀴즈</Link>
                     <Link href="/categories" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">카테고리</Link>
-                    <Link href="/faq" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">FAQ</Link>
-                    <Link href="/introduction" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">소개</Link>
                     <LoginLogoutButton isLogin={isLogin} />
                     <DarkModeToggle />
                 </nav>
