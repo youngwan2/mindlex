@@ -19,9 +19,9 @@ export const API = {
         // 즐겨찾기 생성
         CREATE: BASE_URL + '/api/favorites',
         // 즐겨찾기 삭제
-        DELETE: (id: number, type: 'term' | 'quiz') => BASE_URL + `/api/favorites/${id}?type=${type}`,
+        DELETE: (id: number, type: 'term' | 'quiz' | 'all') => BASE_URL + `/api/favorites/${id}?type=${type}`,
         // 즐겨찾기 목록 조회
-        LIST: (type: 'term' | 'quiz', page: number, size: number) => BASE_URL + `/api/favorites?type=${type}&page=${page}&size=${size}`,
+        LIST: (type: 'term' | 'quiz' | 'all', page: number, size: number) => BASE_URL + `/api/favorites?type=${type}&page=${page}&size=${size}`,
         // 즐겨찾기 대상 조회
         TARGET: (targetId: number, type: string) => BASE_URL + `/api/favorites/target?targetId=${targetId}&type=${type}`,
     }

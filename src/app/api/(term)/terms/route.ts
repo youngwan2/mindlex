@@ -1,6 +1,8 @@
 import { TermEntity } from "@/entities/term/Term";
+import { FavoritesEntity } from "@/entities/favorite/favorites";
 import { getDataSource } from "@/lib/database";
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
 
 
 
@@ -19,6 +21,7 @@ export async function GET(req: NextRequest) {
     const search = req.nextUrl.searchParams.get("search") || ""; // 검색어
     const startDate = req.nextUrl.searchParams.get("startDate") || ""; // 시작 날짜
     const endDate = req.nextUrl.searchParams.get("endDate") || ""; // 종료 날짜
+    const userId = (await auth())?.user?.id || ""; // 현재 로그인한 사용자의 ID (없으면 빈 문자열)
 
     const termEntityRepo = ds.getRepository(TermEntity);
     let qb = termEntityRepo.createQueryBuilder('term');
@@ -79,13 +82,29 @@ export async function GET(req: NextRequest) {
 
     // 페이징 및 정렬
     qb = qb.orderBy('term.id', 'ASC')
-
         .offset(size * (page - 1))
         .limit(size);
 
-    const [data, total] = await qb.getManyAndCount();
+    const [termList, total] = await qb.getManyAndCount(); // 용어 리스트
 
-    return NextResponse.json({ terms: data, total });
+    // userId가 있을 경우, 해당 사용자의 term 북마크 목록 조회
+    let favoriteTermIds: number[] = [];
+    if (userId) {
+        const favoriteRepo = ds.getRepository(FavoritesEntity);
+        const favorites = await favoriteRepo.find({
+            where: { userId, type: 'term' },
+            select: ['targetId']
+        });
+        favoriteTermIds = favorites.map(f => f.targetId); // targetId 만 뽑아서 할당
+    }
+
+    // 각 term에 isFavorite 필드 추가
+    const termsWithFavorite = termList.map(term => ({
+        ...term,
+        isFavorite: userId ? favoriteTermIds.includes(term.id) : false // 기존 리스트에 isFavorite 필드 추가
+    }));
+
+    return NextResponse.json({ terms: termsWithFavorite, total });
 }
 
 /**

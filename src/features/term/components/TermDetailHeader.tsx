@@ -12,7 +12,7 @@ interface TermDetailHeaderProps {
 export default function TermDetailHeader({ term }: TermDetailHeaderProps) {
 
     return (
-        <div className="max-w-[1400px] mx-auto px-4 py-6 mb-3 bg-white dark:bg-transparent border-b border-gray-100 dark:border-gray-700 ">
+        <div className="max-w-[1400px] mx-auto px-4 py-6 mb-8 bg-white dark:bg-transparent border border-t-0 rounded-b-sm border-gray-100 dark:border-gray-800 ">
 
             <div className="flex items-center gap-2 mb-12 text-sm text-gray-300">
                 {/* 뒤로가기 버튼 */}

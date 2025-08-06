@@ -14,7 +14,7 @@ export default async function Header() {
 
     const isLogin = !!session;
     return (
-        <header className="w-full border-b bg-gray backdrop-blur sticky top-0 z-30 dark:bg-gray-900 dark:border-gray-800 py-2 md:py-3">
+        <header className="w-full border-b bg-transparent backdrop-blur sticky top-0 z-30 dark:bg-gray-900 dark:border-gray-800 py-2 md:py-3">
             <div className="max-w-[1400px] mx-auto flex items-center justify-between px-4 md:flex-row flex-col md:h-16 h-auto gap-2 md:gap-0">
                 <div className="flex w-full gap-6">
                     <Link href={"/"} className="flex items-center gap-2 w-full md:w-auto justify-start ">
@@ -34,9 +34,10 @@ export default async function Header() {
                     <MobileSearch />
                 </div>
                 <nav className="flex items-center gap-1 md:order-none order-2 w-full md:w-auto justify-end md:justify-end min-w-[450px]">
-                    <Link href="/terms" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition w-[79px]">용어사전</Link>
-                    <Link href="/quiz" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition w-[52px]">퀴즈</Link>
-                    <Link href="/categories" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">카테고리</Link>
+                    <Link href="/terms" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition w-[48px]">사전</Link>
+                    <Link href="/quiz" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition w-[48px]">퀴즈</Link>
+                    <Link href="/categories" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition w-[48px]">목록</Link>
+                    <Link href="/favorites" className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition w-[79px]">즐겨찾기</Link>
                     <LoginLogoutButton isLogin={isLogin} />
                     <DarkModeToggle />
                 </nav>

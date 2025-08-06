@@ -76,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${inter.variable} ${notoSansKR.variable} antialiased min-h-screen flex flex-col`}>
+        className={`${inter.variable} ${notoSansKR.variable} antialiased min-h-screen flex flex-col `}>
         <QueryProvider>
           <ToastProvider />
           <Header />
