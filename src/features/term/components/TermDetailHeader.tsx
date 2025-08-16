@@ -1,15 +1,23 @@
+"use client"
+
 import { ArrowLeft, Calendar, ChevronRight, Earth, Play, Share } from "lucide-react";
 import Link from "next/link";
 import { Term } from "../types/term.types";
 import { Button } from "@/components/ui/button";
 import { MdAbc } from "react-icons/md";
 import FavoriteButton from "@/shared/components/FavoriteButton";
+import { useState } from "react";
+import QuizOptionsModal from "@/components/term/QuizOptionsModal";
 
 
 interface TermDetailHeaderProps {
     term: Term
 }
 export default function TermDetailHeader({ term }: TermDetailHeaderProps) {
+
+    const [open, setOpen] = useState(false);
+    const onOpen = () => setOpen(true)
+    const onClose = () => setOpen(false)
 
     return (
         <div className="max-w-[1400px] mx-auto px-4 py-6 mb-8 bg-white dark:bg-transparent border border-t-0 rounded-b-sm border-gray-100 dark:border-gray-800 ">
@@ -63,10 +71,11 @@ export default function TermDetailHeader({ term }: TermDetailHeaderProps) {
                         <Share className="w-5 h-5" />
                         <span className="text-sm">공유하기</span>
                     </Button>
-                    <Link href={`/quiz/${term.id}`} className=" w-full flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-400 transition justify-center">
+                    <Button onClick={onOpen} className=" w-full flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-400 transition justify-center">
                         <Play className="w-5 h-5" />
                         <span className="text-sm">퀴즈풀기</span>
-                    </Link>
+                    </Button>
+                    {open && <QuizOptionsModal onClose={onClose} termId={String(term.id)} />}
                 </div>
             </div>
         </div>

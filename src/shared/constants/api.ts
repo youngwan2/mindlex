@@ -1,7 +1,5 @@
 import { TermsApiType } from "@/features/term/types/term.types";
 
-
-
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
 
 export const API = {
@@ -14,6 +12,27 @@ export const API = {
     // 카테고리 목록(전체)
     CATEGORIES: BASE_URL + '/api/categories',
     QUIZ: BASE_URL + '/api/quiz',
+
+    // 퀴즈 목록(복수) 엔드포인트 빌더
+    QUIZZES_LIST: (params?: { termId?: string | number; types?: string[]; limit?: number; shuffle?: boolean }) => {
+        const p = new URLSearchParams();
+        if (params?.termId !== undefined) p.set('termId', String(params.termId));
+        if (params?.types && params.types.length > 0) p.set('types', params.types.join(','));
+        if (params?.limit !== undefined) p.set('limit', String(params.limit));
+        if (typeof params?.shuffle === 'boolean') p.set('shuffle', String(params.shuffle));
+        return BASE_URL + `/api/quizzes?${p.toString()}`;
+    },
+
+    // 퀴즈 통계 엔드포인트 빌더
+    QUIZZES_STATS: (termId: string | number, types?: string[]) => {
+        const p = new URLSearchParams();
+        p.set('termId', String(termId));
+        if (types && types.length > 0) p.set('types', types.join(','));
+        return BASE_URL + `/api/quizzes/stats?${p.toString()}`;
+    },
+
+    // 퀴즈 결과 저장 엔드포인트
+    QUIZ_RESULTS: BASE_URL + '/api/quizzes/results',
 
     FAVORITES: {
         // 즐겨찾기 생성

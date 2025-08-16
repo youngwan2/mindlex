@@ -14,3 +14,19 @@ export async function globalGetFetcher(url: string) {
         throw new Error(`Fetch error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
 }
+
+export async function globalPostFetcher(url: string, body: unknown) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return response.json();
+    } catch (error) {
+        throw new Error(`Fetch POST error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+}

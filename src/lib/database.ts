@@ -8,6 +8,7 @@ import { AccountEntity, SessionEntity, UserEntity, VerificationTokenEntity } fro
 import { TermEntity } from '../entities/term/Term';
 import { TermCategoryEntity } from '../entities/category/categories';
 import { FavoritesEntity } from '@/entities/favorite/favorites';
+import { QuizEntity, QuizOptionEntity, QuizResultEntity, QuizTagEntity } from '@/entities/quiz/quizes';
 
 
 // import { fileURLToPath } from 'url';
@@ -29,7 +30,7 @@ export const AppDataSource = new DataSource({
   // entities: [__dirname + '/../entities/**/*.ts'], // 엔티티 파일 경로 수정
   // migrations: [__dirname + '/../migrations/*.{ts,js}'], // 마이그레이션 파일 경로 수정
   // subscribers: [__dirname + '/../subscribers/*.{ts,js}'],
-  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity, TermEntity, TermCategoryEntity, FavoritesEntity], // 엔티티 파일 경로 수정
+  entities: [UserEntity, AccountEntity, SessionEntity, VerificationTokenEntity, TermEntity, TermCategoryEntity, FavoritesEntity, QuizEntity, QuizOptionEntity, QuizResultEntity, QuizTagEntity], // 엔티티 파일 경로 수정
   migrations: [], // 마이그레이션 파일 경로 수정
   subscribers: [],
 });
