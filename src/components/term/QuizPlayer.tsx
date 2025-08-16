@@ -4,6 +4,8 @@ import { useQuizzes } from '@/features/quiz/api/queries';
 import { useSaveQuizResultsMutation } from '@/features/quiz/api/mutations';
 import { HiCheck, HiX, HiRefresh, HiSave, HiChevronLeft, HiChevronRight, HiLightBulb, HiPencilAlt } from 'react-icons/hi';
 import { MdQuiz, MdTouchApp } from 'react-icons/md';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 type QuizOption = { id: number; optionText: string; isCorrect?: boolean; explanation?: string };
 type QuizItem = { id: number; question?: string; type?: string; options?: QuizOption[] };
@@ -16,6 +18,11 @@ type Props = {
 };
 
 export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 10, initialShuffle = true }: Props) {
+    const router = useRouter();
+    function goToTermDetail() {
+        router.push(`/terms/${termId}`);
+    }
+
     const typesArray = initialTypes ? initialTypes.split(',').map(s => s.trim()).filter(Boolean) : undefined;
 
     const { data, isLoading } = useQuizzes(termId, { types: typesArray, limit: initialLimit, shuffle: initialShuffle });
@@ -152,8 +159,8 @@ export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 1
         const isGood = percentage >= 60;
 
         return (
-            <div className="max-w-2xl mx-auto">
-                <div className="bg-card rounded-xl border border-border shadow-lg overflow-hidden">
+            <motion.div className="max-w-2xl mx-auto" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+                <motion.div className="bg-card rounded-xl border border-border shadow-lg overflow-hidden" layoutId="quiz-summary">
                     {/* Header */}
                     <div className={`px-8 py-6 bg-gradient-to-r ${isExcellent ? 'from-green-500/10 to-emerald-500/10' : isGood ? 'from-blue-500/10 to-cyan-500/10' : 'from-orange-500/10 to-yellow-500/10'}`}>
                         <div className="text-center">
@@ -181,47 +188,62 @@ export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 1
                         </div>
 
                         {/* Progress Bar */}
-                        <div className="space-y-2">
+                        <motion.div className="space-y-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}>
                             <div className="flex justify-between text-sm text-muted-foreground">
                                 <span>진행률</span>
                                 <span>{score} / {quizzes.length}</span>
                             </div>
                             <div className="w-full bg-muted rounded-full h-2">
-                                <div
-                                    className={`h-2 rounded-full transition-all duration-500 ${isExcellent ? 'bg-green-500' : isGood ? 'bg-blue-500' : 'bg-orange-500'}`}
-                                    style={{ width: `${percentage}%` }}
-                                ></div>
+                                <motion.div
+                                    className={`h-2 rounded-full ${isExcellent ? 'bg-green-500' : isGood ? 'bg-blue-500' : 'bg-orange-500'}`}
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${percentage}%` }}
+                                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                                />
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Actions */}
-                        <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                            <button
+                        <motion.div className="flex flex-col sm:flex-row gap-3 pt-4" initial={{ y: 6, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
+                            <motion.button
                                 onClick={handleRestart}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                                 className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors font-medium"
                             >
                                 <HiRefresh className="w-4 h-4" />
                                 다시 풀기
-                            </button>
-                            <button
+                            </motion.button>
+                            <motion.button
                                 onClick={handleSaveResults}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                                 disabled={saving}
                                 className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-lg hover:bg-muted transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <HiSave className="w-4 h-4" />
                                 {saving ? '저장중...' : '결과 저장'}
-                            </button>
-                        </div>
+                            </motion.button>
+                            <motion.button
+                                onClick={goToTermDetail}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-lg bg-white hover:bg-muted transition-colors font-medium"
+                            >
+                                <HiChevronRight className="w-4 h-4" />
+                                용어 상세로 이동
+                            </motion.button>
+                        </motion.div>
                     </div>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         );
     }
 
     const progress = ((index + 1) / quizzes.length) * 100;
 
     return (
-        <div className="max-w-3xl mx-auto">
+        <motion.div className="max-w-3xl mx-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
             {/* Progress Header */}
             <div className="mb-8">
                 <div className="flex items-center justify-between mb-3">
@@ -236,10 +258,12 @@ export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 1
                     </span>
                 </div>
                 <div className="w-full bg-muted rounded-full h-2">
-                    <div
-                        className="bg-brand h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${progress}%` }}
-                    ></div>
+                    <motion.div
+                        className="bg-brand h-2 rounded-full"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progress}%` }}
+                        transition={{ duration: 0.35, ease: 'easeOut' }}
+                    />
                 </div>
             </div>
 
@@ -268,7 +292,7 @@ export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 1
                 </div>
 
                 {/* Options */}
-                <div className="p-8 space-y-3">
+                <motion.div className="p-8 space-y-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
                     {(current.options ?? []).map((opt: QuizOption, optIndex: number) => {
                         const selectedForCurrent = selectedRecord[current.id] ?? null;
                         const isSelected = selectedForCurrent === opt.id;
@@ -277,10 +301,12 @@ export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 1
                         const showResult = answeredForCurrent && isSelected;
 
                         return (
-                            <button
+                            <motion.button
                                 key={opt.id}
                                 onClick={() => handleSelect(opt)}
                                 disabled={answeredForCurrent}
+                                whileHover={{ scale: answeredForCurrent ? 1 : 1.02 }}
+                                whileTap={{ scale: answeredForCurrent ? 1 : 0.98 }}
                                 className={`block w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${showResult
                                     ? isCorrect
                                         ? 'bg-green-50 border-green-200 text-green-900'
@@ -320,10 +346,10 @@ export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 1
                                         )}
                                     </div>
                                 </div>
-                            </button>
+                            </motion.button>
                         );
                     })}
-                </div>
+                </motion.div>
 
                 {/* Navigation */}
                 <div className="px-8 py-6 bg-muted/30 border-t border-border/30">
@@ -341,9 +367,10 @@ export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 1
                             {index + 1} / {quizzes.length}
                         </div>
 
-                        <button
+                        <motion.button
                             onClick={handleNext}
                             className="inline-flex items-center gap-2 px-6 py-2 bg-brand text-white rounded-lg hover:bg-brand-hover transition-colors font-medium"
+                            whileTap={{ scale: 0.98 }}
                         >
                             {index + 1 < quizzes.length ? (
                                 <>
@@ -356,10 +383,10 @@ export default function QuizPlayer({ termId, initialTypes = '', initialLimit = 1
                                     <HiCheck className="w-4 h-4" />
                                 </>
                             )}
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }

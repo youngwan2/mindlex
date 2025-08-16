@@ -245,3 +245,61 @@ html {
 .modal-exit {
   animation: modalFadeOut 0.2s ease-in forwards;
 }
+
+/* 용어 상세 페이지 스타일 */
+.term-detail-card {
+  background: linear-gradient(135deg, var(--color-card) 0%, var(--color-card)/95 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.term-detail-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+}
+
+.dark .term-detail-card:hover {
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+}
+
+/* 그라데이션 텍스트 스타일 */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-foreground) 0%, var(--color-muted-foreground) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 아이콘 컨테이너 스타일 */
+.icon-container {
+  background: linear-gradient(135deg, var(--color-brand)/10 0%, var(--color-brand)/5 100%);
+  border: 1px solid var(--color-brand)/20;
+  transition: all 0.2s ease;
+}
+
+.icon-container:hover {
+  background: linear-gradient(135deg, var(--color-brand)/15 0%, var(--color-brand)/8 100%);
+  border-color: var(--color-brand)/30;
+}
+
+/* 콘텐츠 박스 스타일 */
+.content-box {
+  background: linear-gradient(135deg, var(--color-brand)/5 0%, var(--color-brand)/2 100%);
+  border: 1px solid var(--color-brand)/10;
+  transition: all 0.2s ease;
+}
+
+.content-box-muted {
+  background: linear-gradient(135deg, var(--color-muted)/30 0%, var(--color-muted)/15 100%);
+  border: 1px solid var(--color-border)/50;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .term-detail-card {
+    margin: 0 0.5rem;
+  }
+
+  .term-detail-card:hover {
+    transform: none;
+  }
+}

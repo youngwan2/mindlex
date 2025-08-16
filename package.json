@@ -14,7 +14,8 @@
     "db:migration:revert": "npm run typeorm -- migration:revert -d ./src/lib/database.ts",
     "db:migration:create": "npm run typeorm -- migration:create ./src/migrations/Migration",
     "db:schema:sync": "npm run typeorm -- schema:sync -d ./src/lib/database.ts",
-    "db:schema:drop": "npm run typeorm -- schema:drop -d ./src/lib/database.ts"
+    "db:schema:drop": "npm run typeorm -- schema:drop -d ./src/lib/database.ts",
+    "test": "vitest"
   },
   "dependencies": {
     "@auth/typeorm-adapter": "^2.10.0",
@@ -46,7 +47,8 @@
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
     "typeorm": "^0.3.25",
-    "zod": "^3.25.67"
+    "zod": "^4.0.17",
+    "framer-motion": "^12.23.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -61,6 +63,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tw-animate-css": "^1.3.5",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }

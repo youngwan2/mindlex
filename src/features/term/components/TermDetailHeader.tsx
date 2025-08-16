@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeft, Calendar, ChevronRight, Earth, Play, Share } from "lucide-react";
+import { ArrowLeft, Calendar, ChevronRight, Earth, Play } from "lucide-react";
 import Link from "next/link";
 import { Term } from "../types/term.types";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { MdAbc } from "react-icons/md";
 import FavoriteButton from "@/shared/components/FavoriteButton";
 import { useState } from "react";
 import QuizOptionsModal from "@/components/term/QuizOptionsModal";
+import TermShareButton from "@/components/term/TermShareButton";
 
 
 interface TermDetailHeaderProps {
@@ -62,15 +63,13 @@ export default function TermDetailHeader({ term }: TermDetailHeaderProps) {
                     }
 
                 </div>
-
-
                 {/* 북마크, 공유하기, 퀴즈풀기 */}
                 <div className="flex items-center gap-4 flex-col">
                     <FavoriteButton variant={'outline'} targetId={term.id} type="term" />
-                    <Button variant={'outline'} className="w-full flex items-center gap-2 px-4 py-2  dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                        <Share className="w-5 h-5" />
-                        <span className="text-sm">공유하기</span>
-                    </Button>
+                    <TermShareButton
+                        termKo={term.termKo}
+                        termEn={term.termEn}
+                    />
                     <Button onClick={onOpen} className=" w-full flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-400 transition justify-center">
                         <Play className="w-5 h-5" />
                         <span className="text-sm">퀴즈풀기</span>

@@ -6,7 +6,8 @@ import { API } from '@/shared/constants/api'
 export type QuizStatsResponse = {
     success: true;
     totalCount: number;
-    counts: Record<'mc' | 'ox' | 'short', number>;
+    // counts에 'fill_blank' 타입을 추가합니다.
+    counts: Record<'mc' | 'ox' | 'short' | 'fill_blank', number>;
 } | { success: false; message?: string };
 
 /**
@@ -17,7 +18,8 @@ export type QuizStatsResponse = {
  * 필터 타입:
  * - 'mc' : 객관식
  * - 'ox' : OX 퀴즈
- * - 'short' : 단답형/빈칸 채우기
+ * - 'short' : 단답형
+ * - 'fill_blank' : 빈칸 채우기
  *
  * 반환 값:
  * - success: true인 경우 totalCount와 counts 객체를 포함

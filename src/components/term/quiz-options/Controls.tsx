@@ -1,4 +1,3 @@
-// filepath: src/components/term/quiz-options/Controls.tsx
 'use client';
 import React from 'react';
 

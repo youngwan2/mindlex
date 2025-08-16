@@ -3,6 +3,7 @@ import { getDataSource } from "@/lib/database";
 import { QuizEntity, QuizOptionEntity } from "@/entities/quiz/quizes";
 import { TermEntity } from "@/entities/term/Term";
 import { In } from "typeorm";
+import { normalizeType, computeAppliedTypes } from '@/lib/quizTypes';
 
 /**
  * GET /api/(quiz)/quizes
@@ -10,6 +11,7 @@ import { In } from "typeorm";
  * 프론트에서 categoryId 대신 termId로 호출하는 경우를 지원하도록 확장했습니다.
  * 또한 types, limit, shuffle 쿼리를 지원합니다.
  */
+
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
 
@@ -17,18 +19,6 @@ export async function GET(req: NextRequest) {
     const categoryIds = searchParams.get("categoryId")?.split(",").map(id => Number(id)).filter(Boolean) || [];
     const termIds = searchParams.get("termId")?.split(",").map(id => Number(id)).filter(Boolean) || [];
     const types = searchParams.get("types")?.split(",").map(t => t.trim()).filter(Boolean) || [];
-
-    // 수신된 types 정규화: 공백/하이픈 → 언더스코어, 소문자화, 흔한 별칭 매핑
-    const normalizeType = (raw: string) => {
-        const s = raw.trim().toLowerCase().replace(/\s+/g, '_').replace(/-+/g, '_');
-        // 별칭 매핑 (필요시 확장)
-        const aliasMap: Record<string, string> = {
-            'short': 'short_answer',
-            'short-answer': 'short_answer',
-            'short_answer': 'short_answer'
-        };
-        return aliasMap[s] || s;
-    };
 
     const normalizedTypes = types.map(normalizeType);
     if (normalizedTypes.length > 0) {
@@ -38,6 +28,8 @@ export async function GET(req: NextRequest) {
 
     const limit = Number(searchParams.get("limit") || 100);
     const shuffle = searchParams.get("shuffle") === "true";
+
+    console.log(termIds, limit, shuffle, types)
 
     if (categoryIds.length === 0 && termIds.length === 0) {
         return NextResponse.json({ success: false, message: "categoryId 또는 termId가 필요합니다." }, { status: 400 });
@@ -75,14 +67,37 @@ export async function GET(req: NextRequest) {
 
     const termIdList = terms.map(term => term.id);
 
+    // 새 로직: 요청된 타입과 실제 존재하는 타입의 교집합을 사용하도록 함
+    // 먼저 해당 termId들에 대해 실제 존재하는 퀴즈 타입 목록을 조회
+    const rawTypeRows = await quizRepo.createQueryBuilder('q')
+        .select('DISTINCT q.type', 'type')
+        .where('q.termId IN (:...termIds)', { termIds: termIdList })
+        .getRawMany();
+
+    const availableTypes = (rawTypeRows as { type?: string }[])
+        .map(r => r.type)
+        .filter(Boolean) as string[];
+
+    if (availableTypes.length === 0) {
+        return NextResponse.json({ success: false, message: "해당 용어들에 대한 퀴즈가 존재하지 않습니다." }, { status: 404 });
+    }
+
+    const appliedTypes: string[] = computeAppliedTypes(normalizedTypes, availableTypes);
+    if (normalizedTypes.length > 0 && appliedTypes.length === 0) {
+        return NextResponse.json({
+            success: false,
+            message: `선택한 타입 중 사용 가능한 퀴즈가 없습니다. 사용 가능한 타입: ${availableTypes.join(', ')}`
+        }, { status: 400 });
+    }
+
     // 퀴즈를 가져오기 위한 쿼리 빌드
     // 옵션은 별도 조회하므로 여기서는 quiz 테이블만 조회하도록 조인 제거
     const query = quizRepo.createQueryBuilder("quiz")
         .where("quiz.termId IN (:...termIds)", { termIds: termIdList });
 
-    if (types.length > 0) {
-        // 쿼리에는 정규화된 타입을 사용
-        query.andWhere("quiz.type IN (:...types)", { types: normalizedTypes });
+    if (appliedTypes.length > 0) {
+        // 쿼리에는 정규화된, 그리고 실제 존재하는 타입만 사용
+        query.andWhere("quiz.type IN (:...types)", { types: appliedTypes });
     }
 
     // 셔플 지원: DB 드라이버에 따라 함수명 선택

@@ -1,4 +1,4 @@
-export const VALID_TYPES = ['mc', 'ox', 'short'] as const;
+export const VALID_TYPES = ['mc', 'ox', 'short', 'fill_blank'] as const;
 export type QuizType = typeof VALID_TYPES[number];
 
 export const TYPE_INFO: Record<QuizType, {
@@ -28,5 +28,12 @@ export const TYPE_INFO: Record<QuizType, {
         description: '직접 답안 작성',
         difficulty: '어려움',
         color: 'from-purple-500 to-purple-600'
+    },
+    fill_blank: {
+        label: '빈칸 채우기',
+        iconKey: 'edit',
+        description: '빈칸에 들어갈 단어나 구문을 작성',
+        difficulty: '보통',
+        color: 'from-yellow-500 to-yellow-600'
     }
 };

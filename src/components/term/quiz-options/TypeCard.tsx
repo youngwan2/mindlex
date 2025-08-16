@@ -11,7 +11,7 @@ type Props = {
     onToggle: (t: QuizType) => void;
 };
 
-function iconFor(key: string) {
+function iconFor(key?: string) {
     switch (key) {
         case 'list':
             return <HiViewList className="w-6 h-6" />;
@@ -28,8 +28,10 @@ export default function TypeCard({ type, active, count, onToggle }: Props) {
     const info = TYPE_INFO?.[type] ?? { label: String(type), iconKey: 'edit', description: '', difficulty: '', color: '' };
     return (
         <button
-            onClick={() => onToggle(type)}
+            onClick={() => { if (count === 0) return; onToggle(type); }}
             disabled={count === 0}
+            aria-disabled={count === 0}
+            title={count === 0 ? '해당 타입에 사용 가능한 문제가 없습니다.' : info.description || info.label}
             className={`relative p-6 rounded-xl border transition-all duration-200 ${active
                 ? 'bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] border-[var(--color-brand)] text-white shadow-lg transform scale-105'
                 : count === 0
