@@ -4,7 +4,7 @@ import CategoryList from './CategoryList';
 
 export default async function CategorySection() {
 
-    const categoryInfo = await globalGetFetcher(API.CATEGORIES);
+    const categoryInfo = await globalGetFetcher(API.CATEGORIES());
 
     return (
         <section className="dark:bg-gray-900">

@@ -8,7 +8,10 @@ import { useState } from "react";
 
 export default function TermPageClient() {
     const searchParams = useSearchParams();
-    const categoryId = searchParams.get('categoryId') || 0;
+    const categoryIdParam = searchParams.get('categoryId');
+
+    // categoryId가 없거나 0이면 undefined로 설정하여 모든 용어 조회
+    const initialCategoryId = categoryIdParam && Number(categoryIdParam) > 0 ? Number(categoryIdParam) : undefined;
 
     const [searchCondition, setSearchCondition] = useState({
         page: 1,
@@ -18,7 +21,7 @@ export default function TermPageClient() {
         order: 'ASC',
         startDate: '',
         endDate: '',
-        categoryId: Number(categoryId),
+        categoryId: initialCategoryId,
     });
 
     function onSubmit(formData: FormData) {

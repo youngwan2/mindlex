@@ -12,19 +12,21 @@ import { auth } from "@/auth";
  * @returns 
  */
 export async function GET(req: NextRequest) {
-    const ds = await getDataSource();
-
-    const size = Number(req.nextUrl.searchParams.get("size")) || 20; // 페이지당 항목 수
+    const ds = await getDataSource(); const size = Number(req.nextUrl.searchParams.get("size")) || 20; // 페이지당 항목 수
     const page = Number(req.nextUrl.searchParams.get("page")) || 1; // 페이지 번호
     const sort = req.nextUrl.searchParams.get("sort") || "id"; // 정렬 기준
     const order = req.nextUrl.searchParams.get("order") || "ASC"; // 정렬 순서 (ASC 또는 DESC)
     const search = req.nextUrl.searchParams.get("search") || ""; // 검색어
     const startDate = req.nextUrl.searchParams.get("startDate") || ""; // 시작 날짜
     const endDate = req.nextUrl.searchParams.get("endDate") || ""; // 종료 날짜
+    const categoryId = req.nextUrl.searchParams.get("categoryId"); // 카테고리 ID
     const userId = (await auth())?.user?.id || ""; // 현재 로그인한 사용자의 ID (없으면 빈 문자열)
 
     const termEntityRepo = ds.getRepository(TermEntity);
-    let qb = termEntityRepo.createQueryBuilder('term');
+    let qb = termEntityRepo.createQueryBuilder('term');    // 카테고리 ID 필터
+    if (categoryId && !isNaN(Number(categoryId)) && Number(categoryId) > 0) {
+        qb = qb.andWhere('term.categoryId = :categoryId', { categoryId: Number(categoryId) });
+    }
 
     // 검색어(한글/영문/한자/약어/정의/설명 등) 필터
     if (search) {

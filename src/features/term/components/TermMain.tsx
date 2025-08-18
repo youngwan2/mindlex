@@ -167,7 +167,7 @@ export default function TermMain({ terms, isLoading, totalCount, page, size, onP
     };
 
     return (
-        <div className="pt-6 bg-gray-50">
+        <div className="pt-6 bg-gray-50 dark:bg-[#101828]">
             <div className="max-w-[1400px] mx-auto h-auto px-4">
                 <p className="flex items-center justify-between mb-4 text-gray-900 dark:text-gray-100">
                     용어 목록 ({totalCount || terms.length})
