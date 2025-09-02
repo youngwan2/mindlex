@@ -1,11 +1,10 @@
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { BookOpen, Search } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import Link from "next/link";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
 import MobileSearch from "@/components/ui/MobileSearch";
 import { auth } from "@/auth";
 import LoginLogoutButton from "./LoginLogoutButton";
+import HeaderSearch from "./HeaderSearch";
 
 export default async function Header() {
 
@@ -23,12 +22,7 @@ export default async function Header() {
                     </Link>
 
                     {/* 데스크탑 전용 검색창*/}
-                    <form className="hidden md:flex items-center gap-2 w-full max-w-xs md:order-none order-3 md:mt-0 mt-2">
-                        <Input type="search" placeholder="용어 입력 후 엔터" className="rounded-md dark:bg-gray-800 dark:text-gray-100 w-full" />
-                        <Button type="submit" size="icon" variant="ghost" aria-label="검색">
-                            <Search className="w-5 h-5" />
-                        </Button>
-                    </form>
+                    <HeaderSearch />
 
                     {/* 모바일 전용 검색 모달 */}
                     <MobileSearch />

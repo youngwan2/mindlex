@@ -20,7 +20,7 @@ export default function HeroSection() {
                     <Input id="search" placeholder="궁금한 정신건강 용어를 입력해주세요.." type="search" className="pl-12 py-5 placeholder:text-lg rounded-full dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-400 dark:border-gray-700" />
                 </form>
                 <div className="flex gap-6 mx-auto md:justify-center mt-8 md:flex-row flex-col items-stretch w-full">
-                    <Button variant="outline" size="sm" className="rounded-3xl px-12 md:py-6 py-5 gap-4 md:max-w-[200px] max-w-auto w-full bg-brand dark:bg-brand-dark text-white hover:bg-brand-hover dark:hover:bg-brand-hover hover:text-white cursor-pointer">
+                    <Button onClick={() => router.push("/quiz")} variant="outline" size="sm" className="rounded-3xl px-12 md:py-6 py-5 gap-4 md:max-w-[200px] max-w-auto w-full bg-brand dark:bg-brand-dark text-white hover:bg-brand-hover dark:hover:bg-brand-hover hover:text-white cursor-pointer">
                         <Play /> 퀴즈 시작하기
                     </Button>
 

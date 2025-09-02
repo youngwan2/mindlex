@@ -59,5 +59,17 @@ export const API = {
         LIST: (type: 'term' | 'quiz' | 'all', page: number, size: number) => BASE_URL + `/api/favorites?type=${type}&page=${page}&size=${size}`,
         // 즐겨찾기 대상 조회
         TARGET: (targetId: number, type: string) => BASE_URL + `/api/favorites/target?targetId=${targetId}&type=${type}`,
-    }
+    },
+    AUTH: {
+        LOGIN: BASE_URL + '/api/auth/login',
+        LOGOUT: BASE_URL + '/api/auth/logout',
+        REGISTER: BASE_URL + '/api/auth/register',
+        USER: BASE_URL + '/api/auth/user',
+        // 프로필 업데이트
+        UPDATE_PROFILE: BASE_URL + '/api/auth/user/profile',
+        // OAuth2 시작
+        OAUTH2_START: (provider: string) => BASE_URL + `/api/auth/oauth2/${provider}`,
+        // OAuth2 콜백
+        OAUTH2_CALLBACK: (provider: string) => BASE_URL + `/api/auth/oauth2/${provider}/callback`,
+    },
 }

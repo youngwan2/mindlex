@@ -1,13 +1,15 @@
 import mdx from '@next/mdx';
-import mdxMermaid from 'mdx-mermaid';
+// import mdxMermaid from 'mdx-mermaid'; // 플러그인을 직접 loader options로 전달하면 직렬화 에러가 발생할 수 있어 제거
 import type { NextConfig } from 'next';
 
 const withMDX = mdx({
-  extension: /\.mdx?$/,
+  extension: /\.(mdx?)$/,
   options: {
-    remarkPlugins: [
-      [mdxMermaid, { output: 'svg' }]
-    ],
+    // loader에 전달되는 옵션은 plain JS 객체만 허용됩니다.
+    // remark/rehype 플러그인(함수)을 직접 넣지 말고, 필요 시 페이지 레벨이나 빌드 스크립트에서 적용하세요.
+    providerImportSource: '@mdx-js/react',
+    remarkPlugins: [],
+    rehypePlugins: [],
   },
 });
 

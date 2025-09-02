@@ -21,10 +21,14 @@ export default function CategoryPage() {
 
     const { categories, totalCount, isLoading } = useCategoryGetQuery(queryParams);
 
+    // 카테고리 최상위 여부 변경 핸들러
+    // isTopCategory 상태를 토글하는 함수
     const onTopCategoryChange = useCallback(() => {
         setTop(old => !old);
     }, []);
 
+    // 검색 파라미터 변경 핸들러
+    // 검색 조건을 업데이트하는 함수
     const onSearchChange = useCallback((params: CategorySearchParams) => {
         setSearchParams(params);
     }, []);

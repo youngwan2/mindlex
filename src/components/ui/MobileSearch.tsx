@@ -4,9 +4,20 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 
 export default function MobileSearch() {
     const [searchOpen, setSearchOpen] = useState(false);
+    const [q, setQ] = useState('');
+    const router = useRouter();
+
+    function onSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        const query = q.trim();
+        if (query) router.push(`/terms?search=${encodeURIComponent(query)}`);
+        else router.push('/terms');
+        setSearchOpen(false);
+    }
 
     return (
         <>
@@ -23,16 +34,25 @@ export default function MobileSearch() {
             {searchOpen && (
                 createPortal(
                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-                        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 w-full max-w-sm mx-auto flex flex-col gap-4">
+                        <form onSubmit={onSubmit} className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 w-full max-w-sm mx-auto flex flex-col gap-4">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">용어 검색</span>
                                 <Button size="icon" variant="ghost" aria-label="닫기" onClick={() => setSearchOpen(false)}>
                                     <span className="text-2xl">×</span>
                                 </Button>
                             </div>
-                            <Input autoFocus type="search" placeholder="용어 입력 후 엔터" className="rounded-md dark:bg-gray-800 dark:text-gray-100 w-full" />
+                            <Input
+                                autoFocus
+                                name="search"
+                                type="search"
+                                placeholder="용어 입력 후 엔터"
+                                className="rounded-md dark:bg-gray-800 dark:text-gray-100 w-full"
+                                value={q}
+                                onChange={(e) => setQ(e.target.value)}
+                                aria-label="용어 검색"
+                            />
                             <Button type="submit" className="w-full mt-2">검색</Button>
-                        </div>
+                        </form>
                     </div>
                     , document.body)
             )}
